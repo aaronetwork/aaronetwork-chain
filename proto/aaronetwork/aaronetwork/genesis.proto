@@ -1,0 +1,17 @@
+syntax = "proto3";
+package aaronetwork.aaronetwork;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "aaronetwork/aaronetwork/params.proto";
+
+option go_package = "aaronetwork/x/aaronetwork/types";
+
+// GenesisState defines the aaronetwork module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
