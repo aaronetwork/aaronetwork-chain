@@ -1,22 +1,67 @@
 version: 1
-validation: sovereign
-accounts: 
-- name: alice
-  coins:
-  - 20000token
-  - 200000000stake
-- name: bob
-  coins:
-  - 10000token
-  - 100000000stake
+accounts:
+  - name: Aaron_Network_Foundation
+    coins:
+      - "350000000000uaaron"
 client:
   openapi:
     path: docs/static/openapi.yml
-faucet:
-  name: bob
-  coins:
-  - 5token
-  - 100000stake
 validators:
-- name: alice
-  bonded: 100000000stake
+  - name: Aaron_Network_Foundation
+    bonded: "345000000000uaaron"
+genesis:
+  app_state:
+    bank:
+      denom_metadata:
+        - description: "Aaron Network"
+          denom_units:
+            - denom: "uaaron"
+              exponent: "0"
+              aliases: [ ]
+            - denom: "aaron"
+              exponent: "6"
+              aliases: [ ]
+          base: "uaaron"
+          display: "aaron"
+          name: "Aaron Network"
+          symbol: "AARON"
+    staking:
+      params:
+        bond_denom: "uaaron"
+    gov:
+      deposit_params:
+        min_deposit:
+          - amount: "1000000000"
+            denom: "uaaron"
+      params:
+        burn_proposal_deposit_prevote: false
+        burn_vote_quorum: false
+        burn_vote_veto: true
+        expedited_min_deposit:
+          - amount: "1500000000"
+            denom: "uaaron"
+        expedited_threshold: '0.667000000000000000'
+        expedited_voting_period: 86400s
+        max_deposit_period: 172800s
+        min_deposit:
+          - amount: "1000"
+            denom: "uaaron"
+        min_deposit_ratio: '0.010000000000000000'
+        min_initial_deposit_ratio: '0.000000000000000000'
+        proposal_cancel_dest: ''
+        proposal_cancel_ratio: '0.500000000000000000'
+        quorum: '0.334000000000000000'
+        threshold: '0.500000000000000000'
+        veto_threshold: '0.334000000000000000'
+        voting_period: 172800s
+    crisis:
+      constant_fee:
+        denom: "uaaron"
+    mint:
+      minter:
+        inflation: "0.000000000000000"
+      params:
+        inflation_max: "0.003000000000000"
+        inflation_min: "0.001000000000000"
+        inflation_rate_change: "0.002000000000000"
+        mint_denom: "uaaron"
