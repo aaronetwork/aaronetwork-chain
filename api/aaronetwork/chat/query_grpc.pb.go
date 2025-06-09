@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName = "/aaronetwork.chat.Query/Params"
+	Query_Params_FullMethodName   = "/aaronetwork.chat.Query/Params"
+	Query_ListRoom_FullMethodName = "/aaronetwork.chat.Query/ListRoom"
+	Query_ShowRoom_FullMethodName = "/aaronetwork.chat.Query/ShowRoom"
 )
 
 // QueryClient is the client API for Query service.
@@ -28,6 +30,10 @@ const (
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a list of ListRoom items.
+	ListRoom(ctx context.Context, in *QueryListRoomRequest, opts ...grpc.CallOption) (*QueryListRoomResponse, error)
+	// Queries a list of ShowRoom items.
+	ShowRoom(ctx context.Context, in *QueryShowRoomRequest, opts ...grpc.CallOption) (*QueryShowRoomResponse, error)
 }
 
 type queryClient struct {
@@ -47,12 +53,34 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) ListRoom(ctx context.Context, in *QueryListRoomRequest, opts ...grpc.CallOption) (*QueryListRoomResponse, error) {
+	out := new(QueryListRoomResponse)
+	err := c.cc.Invoke(ctx, Query_ListRoom_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ShowRoom(ctx context.Context, in *QueryShowRoomRequest, opts ...grpc.CallOption) (*QueryShowRoomResponse, error) {
+	out := new(QueryShowRoomResponse)
+	err := c.cc.Invoke(ctx, Query_ShowRoom_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a list of ListRoom items.
+	ListRoom(context.Context, *QueryListRoomRequest) (*QueryListRoomResponse, error)
+	// Queries a list of ShowRoom items.
+	ShowRoom(context.Context, *QueryShowRoomRequest) (*QueryShowRoomResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -62,6 +90,12 @@ type UnimplementedQueryServer struct {
 
 func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (UnimplementedQueryServer) ListRoom(context.Context, *QueryListRoomRequest) (*QueryListRoomResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRoom not implemented")
+}
+func (UnimplementedQueryServer) ShowRoom(context.Context, *QueryShowRoomRequest) (*QueryShowRoomResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowRoom not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -94,6 +128,42 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListRoomRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListRoom(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListRoom_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListRoom(ctx, req.(*QueryListRoomRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ShowRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowRoomRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowRoom(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowRoom_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowRoom(ctx, req.(*QueryShowRoomRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -104,6 +174,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "ListRoom",
+			Handler:    _Query_ListRoom_Handler,
+		},
+		{
+			MethodName: "ShowRoom",
+			Handler:    _Query_ShowRoom_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
