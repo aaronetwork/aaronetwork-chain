@@ -54,8 +54,11 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	aaronetworkmodulev1 "aaronetwork/api/aaronetwork/aaronetwork/module"
+	chatmodulev1 "aaronetwork/api/aaronetwork/chat/module"
 	_ "aaronetwork/x/aaronetwork/module" // import for side-effects
 	aaronetworkmoduletypes "aaronetwork/x/aaronetwork/types"
+	_ "aaronetwork/x/chat/module" // import for side-effects
+	chatmoduletypes "aaronetwork/x/chat/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -94,6 +97,7 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		aaronetworkmoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +123,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		aaronetworkmoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +143,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		aaronetworkmoduletypes.ModuleName,
+		chatmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -296,6 +302,10 @@ var (
 			{
 				Name:   aaronetworkmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&aaronetworkmodulev1.Module{}),
+			},
+			{
+				Name:   chatmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&chatmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
