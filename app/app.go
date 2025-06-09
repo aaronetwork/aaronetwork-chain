@@ -76,6 +76,8 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	aaronetworkmodulekeeper "aaronetwork/x/aaronetwork/keeper"
+	chatmodulekeeper "aaronetwork/x/chat/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"aaronetwork/docs"
@@ -142,6 +144,7 @@ type App struct {
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
 	AaronetworkKeeper aaronetworkmodulekeeper.Keeper
+	ChatKeeper        chatmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -246,6 +249,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.AaronetworkKeeper,
+		&app.ChatKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
