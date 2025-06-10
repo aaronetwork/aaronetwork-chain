@@ -1,9 +1,8 @@
 package keeper
 
 import (
-	"context"
-
 	"aaronetwork/x/chat/types"
+	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
@@ -16,9 +15,14 @@ func (k Keeper) ListRoom(goCtx context.Context, req *types.QueryListRoomRequest)
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	roomsValue := k.GetAllRoom(sdk.WrapSDKContext(ctx)) // []types.Room
 
-	// TODO: Process the query
-	_ = ctx
+	roomsPtr := make([]*types.Room, len(roomsValue))
+	for i := range roomsValue {
+		roomsPtr[i] = &roomsValue[i]
+	}
 
-	return &types.QueryListRoomResponse{}, nil
+	return &types.QueryListRoomResponse{
+		Room: roomsPtr,
+	}, nil
 }

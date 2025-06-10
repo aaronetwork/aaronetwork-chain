@@ -44,5 +44,7 @@ message MsgCreateRoom {
   string description = 3;
 }
 
-message MsgCreateRoomResponse {}
+message MsgCreateRoomResponse {
+  string id = 1;
+}
 

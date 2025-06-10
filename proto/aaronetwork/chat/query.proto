@@ -7,45 +7,37 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "aaronetwork/chat/params.proto";
+import "aaronetwork/chat/room.proto";
 
 option go_package = "aaronetwork/x/chat/types";
 
-// Query defines the gRPC querier service.
 service Query {
-  
-  // Parameters queries the parameters of the module.
+
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/aaronetwork/chat/params";
-  
   }
-  
-  // Queries a list of ListRoom items.
+
   rpc ListRoom (QueryListRoomRequest) returns (QueryListRoomResponse) {
     option (google.api.http).get = "/aaronetwork/chat/list_room";
-  
   }
-  
-  // Queries a list of ShowRoom items.
+
   rpc ShowRoom (QueryShowRoomRequest) returns (QueryShowRoomResponse) {
     option (google.api.http).get = "/aaronetwork/chat/show_room/{id}";
-  
   }
 }
-// QueryParamsRequest is request type for the Query/Params RPC method.
-message QueryParamsRequest {}
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsRequest {}
 message QueryParamsResponse {
-  
-  // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
-message QueryListRoomRequest {}
+message QueryListRoomRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
 
 message QueryListRoomResponse {
-  string room       = 1;
-  string pagination = 2;
+  repeated Room room = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryShowRoomRequest {
@@ -53,6 +45,5 @@ message QueryShowRoomRequest {
 }
 
 message QueryShowRoomResponse {
-  string room = 1;
+  Room room = 1;
 }
-

@@ -1420,12 +1420,14 @@ func (x *fastReflection_MsgCreateRoom) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgCreateRoomResponse protoreflect.MessageDescriptor
+	md_MsgCreateRoomResponse    protoreflect.MessageDescriptor
+	fd_MsgCreateRoomResponse_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_aaronetwork_chat_tx_proto_init()
 	md_MsgCreateRoomResponse = File_aaronetwork_chat_tx_proto.Messages().ByName("MsgCreateRoomResponse")
+	fd_MsgCreateRoomResponse_id = md_MsgCreateRoomResponse.Fields().ByName("id")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateRoomResponse)(nil)
@@ -1493,6 +1495,12 @@ func (x *fastReflection_MsgCreateRoomResponse) Interface() protoreflect.ProtoMes
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgCreateRoomResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != "" {
+		value := protoreflect.ValueOfString(x.Id)
+		if !f(fd_MsgCreateRoomResponse_id, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -1508,6 +1516,8 @@ func (x *fastReflection_MsgCreateRoomResponse) Range(f func(protoreflect.FieldDe
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgCreateRoomResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		return x.Id != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1524,6 +1534,8 @@ func (x *fastReflection_MsgCreateRoomResponse) Has(fd protoreflect.FieldDescript
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateRoomResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		x.Id = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1540,6 +1552,9 @@ func (x *fastReflection_MsgCreateRoomResponse) Clear(fd protoreflect.FieldDescri
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgCreateRoomResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		value := x.Id
+		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1560,6 +1575,8 @@ func (x *fastReflection_MsgCreateRoomResponse) Get(descriptor protoreflect.Field
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateRoomResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		x.Id = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1580,6 +1597,8 @@ func (x *fastReflection_MsgCreateRoomResponse) Set(fd protoreflect.FieldDescript
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateRoomResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		panic(fmt.Errorf("field id of message aaronetwork.chat.MsgCreateRoomResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1593,6 +1612,8 @@ func (x *fastReflection_MsgCreateRoomResponse) Mutable(fd protoreflect.FieldDesc
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgCreateRoomResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "aaronetwork.chat.MsgCreateRoomResponse.id":
+		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.MsgCreateRoomResponse"))
@@ -1662,6 +1683,10 @@ func (x *fastReflection_MsgCreateRoomResponse) ProtoMethods() *protoiface.Method
 		var n int
 		var l int
 		_ = l
+		l = len(x.Id)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1690,6 +1715,13 @@ func (x *fastReflection_MsgCreateRoomResponse) ProtoMethods() *protoiface.Method
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Id) > 0 {
+			i -= len(x.Id)
+			copy(dAtA[i:], x.Id)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Id)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1740,6 +1772,38 @@ func (x *fastReflection_MsgCreateRoomResponse) ProtoMethods() *protoiface.Method
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgCreateRoomResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Id = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1917,6 +1981,8 @@ type MsgCreateRoomResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *MsgCreateRoomResponse) Reset() {
@@ -1937,6 +2003,13 @@ func (*MsgCreateRoomResponse) ProtoMessage() {}
 // Deprecated: Use MsgCreateRoomResponse.ProtoReflect.Descriptor instead.
 func (*MsgCreateRoomResponse) Descriptor() ([]byte, []int) {
 	return file_aaronetwork_chat_tx_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MsgCreateRoomResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 var File_aaronetwork_chat_tx_proto protoreflect.FileDescriptor
@@ -1973,8 +2046,9 @@ var file_aaronetwork_chat_tx_proto_rawDesc = []byte{
 	0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70,
 	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63,
 	0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x17, 0x0a, 0x15, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xc2,
+	0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x27, 0x0a, 0x15, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x32, 0xc2,
 	0x01, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x5c, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
 	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74,
 	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64,

@@ -28,11 +28,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueryClient interface {
-	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	// Queries a list of ListRoom items.
 	ListRoom(ctx context.Context, in *QueryListRoomRequest, opts ...grpc.CallOption) (*QueryListRoomResponse, error)
-	// Queries a list of ShowRoom items.
 	ShowRoom(ctx context.Context, in *QueryShowRoomRequest, opts ...grpc.CallOption) (*QueryShowRoomResponse, error)
 }
 
@@ -75,11 +72,8 @@ func (c *queryClient) ShowRoom(ctx context.Context, in *QueryShowRoomRequest, op
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
-	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	// Queries a list of ListRoom items.
 	ListRoom(context.Context, *QueryListRoomRequest) (*QueryListRoomResponse, error)
-	// Queries a list of ShowRoom items.
 	ShowRoom(context.Context, *QueryShowRoomRequest) (*QueryShowRoomResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }

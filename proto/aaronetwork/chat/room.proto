@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package aaronetwork.chat;
+
+option go_package = "aaronetwork/x/chat/types";
+
+message Room {
+  string id = 1;
+  string creator = 2;
+  string title = 3;
+  string description = 4;
+}
