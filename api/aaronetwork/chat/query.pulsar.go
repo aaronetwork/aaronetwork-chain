@@ -3,7 +3,7 @@ package chat
 
 import (
 	_ "cosmossdk.io/api/amino"
-	_ "cosmossdk.io/api/cosmos/base/query/v1beta1"
+	v1beta1 "cosmossdk.io/api/cosmos/base/query/v1beta1"
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -808,12 +808,14 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryListRoomRequest protoreflect.MessageDescriptor
+	md_QueryListRoomRequest            protoreflect.MessageDescriptor
+	fd_QueryListRoomRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_aaronetwork_chat_query_proto_init()
 	md_QueryListRoomRequest = File_aaronetwork_chat_query_proto.Messages().ByName("QueryListRoomRequest")
+	fd_QueryListRoomRequest_pagination = md_QueryListRoomRequest.Fields().ByName("pagination")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryListRoomRequest)(nil)
@@ -881,6 +883,12 @@ func (x *fastReflection_QueryListRoomRequest) Interface() protoreflect.ProtoMess
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListRoomRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryListRoomRequest_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -896,6 +904,8 @@ func (x *fastReflection_QueryListRoomRequest) Range(f func(protoreflect.FieldDes
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryListRoomRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -912,6 +922,8 @@ func (x *fastReflection_QueryListRoomRequest) Has(fd protoreflect.FieldDescripto
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListRoomRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -928,6 +940,9 @@ func (x *fastReflection_QueryListRoomRequest) Clear(fd protoreflect.FieldDescrip
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryListRoomRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -948,6 +963,8 @@ func (x *fastReflection_QueryListRoomRequest) Get(descriptor protoreflect.FieldD
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListRoomRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -968,6 +985,11 @@ func (x *fastReflection_QueryListRoomRequest) Set(fd protoreflect.FieldDescripto
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListRoomRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageRequest)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -981,6 +1003,9 @@ func (x *fastReflection_QueryListRoomRequest) Mutable(fd protoreflect.FieldDescr
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryListRoomRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "aaronetwork.chat.QueryListRoomRequest.pagination":
+		m := new(v1beta1.PageRequest)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomRequest"))
@@ -1050,6 +1075,10 @@ func (x *fastReflection_QueryListRoomRequest) ProtoMethods() *protoiface.Methods
 		var n int
 		var l int
 		_ = l
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1078,6 +1107,20 @@ func (x *fastReflection_QueryListRoomRequest) ProtoMethods() *protoiface.Methods
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1128,6 +1171,42 @@ func (x *fastReflection_QueryListRoomRequest) ProtoMethods() *protoiface.Methods
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListRoomRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageRequest{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1161,6 +1240,57 @@ func (x *fastReflection_QueryListRoomRequest) ProtoMethods() *protoiface.Methods
 		Merge:             nil,
 		CheckInitialized:  nil,
 	}
+}
+
+var _ protoreflect.List = (*_QueryListRoomResponse_1_list)(nil)
+
+type _QueryListRoomResponse_1_list struct {
+	list *[]*Room
+}
+
+func (x *_QueryListRoomResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryListRoomResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryListRoomResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Room)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryListRoomResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Room)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryListRoomResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(Room)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListRoomResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryListRoomResponse_1_list) NewElement() protoreflect.Value {
+	v := new(Room)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListRoomResponse_1_list) IsValid() bool {
+	return x.list != nil
 }
 
 var (
@@ -1241,14 +1371,14 @@ func (x *fastReflection_QueryListRoomResponse) Interface() protoreflect.ProtoMes
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListRoomResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Room != "" {
-		value := protoreflect.ValueOfString(x.Room)
+	if len(x.Room) != 0 {
+		value := protoreflect.ValueOfList(&_QueryListRoomResponse_1_list{list: &x.Room})
 		if !f(fd_QueryListRoomResponse_room, value) {
 			return
 		}
 	}
-	if x.Pagination != "" {
-		value := protoreflect.ValueOfString(x.Pagination)
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 		if !f(fd_QueryListRoomResponse_pagination, value) {
 			return
 		}
@@ -1269,9 +1399,9 @@ func (x *fastReflection_QueryListRoomResponse) Range(f func(protoreflect.FieldDe
 func (x *fastReflection_QueryListRoomResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		return x.Room != ""
+		return len(x.Room) != 0
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
-		return x.Pagination != ""
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1289,9 +1419,9 @@ func (x *fastReflection_QueryListRoomResponse) Has(fd protoreflect.FieldDescript
 func (x *fastReflection_QueryListRoomResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		x.Room = ""
+		x.Room = nil
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
-		x.Pagination = ""
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1309,11 +1439,14 @@ func (x *fastReflection_QueryListRoomResponse) Clear(fd protoreflect.FieldDescri
 func (x *fastReflection_QueryListRoomResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		value := x.Room
-		return protoreflect.ValueOfString(value)
+		if len(x.Room) == 0 {
+			return protoreflect.ValueOfList(&_QueryListRoomResponse_1_list{})
+		}
+		listValue := &_QueryListRoomResponse_1_list{list: &x.Room}
+		return protoreflect.ValueOfList(listValue)
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
 		value := x.Pagination
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1335,9 +1468,11 @@ func (x *fastReflection_QueryListRoomResponse) Get(descriptor protoreflect.Field
 func (x *fastReflection_QueryListRoomResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		x.Room = value.Interface().(string)
+		lv := value.List()
+		clv := lv.(*_QueryListRoomResponse_1_list)
+		x.Room = *clv.list
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
-		x.Pagination = value.Interface().(string)
+		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1359,9 +1494,16 @@ func (x *fastReflection_QueryListRoomResponse) Set(fd protoreflect.FieldDescript
 func (x *fastReflection_QueryListRoomResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		panic(fmt.Errorf("field room of message aaronetwork.chat.QueryListRoomResponse is not mutable"))
+		if x.Room == nil {
+			x.Room = []*Room{}
+		}
+		value := &_QueryListRoomResponse_1_list{list: &x.Room}
+		return protoreflect.ValueOfList(value)
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
-		panic(fmt.Errorf("field pagination of message aaronetwork.chat.QueryListRoomResponse is not mutable"))
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageResponse)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1376,9 +1518,11 @@ func (x *fastReflection_QueryListRoomResponse) Mutable(fd protoreflect.FieldDesc
 func (x *fastReflection_QueryListRoomResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryListRoomResponse.room":
-		return protoreflect.ValueOfString("")
+		list := []*Room{}
+		return protoreflect.ValueOfList(&_QueryListRoomResponse_1_list{list: &list})
 	case "aaronetwork.chat.QueryListRoomResponse.pagination":
-		return protoreflect.ValueOfString("")
+		m := new(v1beta1.PageResponse)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryListRoomResponse"))
@@ -1448,12 +1592,14 @@ func (x *fastReflection_QueryListRoomResponse) ProtoMethods() *protoiface.Method
 		var n int
 		var l int
 		_ = l
-		l = len(x.Room)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
+		if len(x.Room) > 0 {
+			for _, e := range x.Room {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
 		}
-		l = len(x.Pagination)
-		if l > 0 {
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -1485,19 +1631,35 @@ func (x *fastReflection_QueryListRoomResponse) ProtoMethods() *protoiface.Method
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Pagination) > 0 {
-			i -= len(x.Pagination)
-			copy(dAtA[i:], x.Pagination)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Pagination)))
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0x12
 		}
 		if len(x.Room) > 0 {
-			i -= len(x.Room)
-			copy(dAtA[i:], x.Room)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Room)))
-			i--
-			dAtA[i] = 0xa
+			for iNdEx := len(x.Room) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Room[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1552,7 +1714,7 @@ func (x *fastReflection_QueryListRoomResponse) ProtoMethods() *protoiface.Method
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Room", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1562,29 +1724,31 @@ func (x *fastReflection_QueryListRoomResponse) ProtoMethods() *protoiface.Method
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Room = string(dAtA[iNdEx:postIndex])
+				x.Room = append(x.Room, &Room{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Room[len(x.Room)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1594,23 +1758,27 @@ func (x *fastReflection_QueryListRoomResponse) ProtoMethods() *protoiface.Method
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Pagination = string(dAtA[iNdEx:postIndex])
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageResponse{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -2143,8 +2311,8 @@ func (x *fastReflection_QueryShowRoomResponse) Interface() protoreflect.ProtoMes
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryShowRoomResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Room != "" {
-		value := protoreflect.ValueOfString(x.Room)
+	if x.Room != nil {
+		value := protoreflect.ValueOfMessage(x.Room.ProtoReflect())
 		if !f(fd_QueryShowRoomResponse_room, value) {
 			return
 		}
@@ -2165,7 +2333,7 @@ func (x *fastReflection_QueryShowRoomResponse) Range(f func(protoreflect.FieldDe
 func (x *fastReflection_QueryShowRoomResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
-		return x.Room != ""
+		return x.Room != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2183,7 +2351,7 @@ func (x *fastReflection_QueryShowRoomResponse) Has(fd protoreflect.FieldDescript
 func (x *fastReflection_QueryShowRoomResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
-		x.Room = ""
+		x.Room = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2202,7 +2370,7 @@ func (x *fastReflection_QueryShowRoomResponse) Get(descriptor protoreflect.Field
 	switch descriptor.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
 		value := x.Room
-		return protoreflect.ValueOfString(value)
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2224,7 +2392,7 @@ func (x *fastReflection_QueryShowRoomResponse) Get(descriptor protoreflect.Field
 func (x *fastReflection_QueryShowRoomResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
-		x.Room = value.Interface().(string)
+		x.Room = value.Message().Interface().(*Room)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2246,7 +2414,10 @@ func (x *fastReflection_QueryShowRoomResponse) Set(fd protoreflect.FieldDescript
 func (x *fastReflection_QueryShowRoomResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
-		panic(fmt.Errorf("field room of message aaronetwork.chat.QueryShowRoomResponse is not mutable"))
+		if x.Room == nil {
+			x.Room = new(Room)
+		}
+		return protoreflect.ValueOfMessage(x.Room.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2261,7 +2432,8 @@ func (x *fastReflection_QueryShowRoomResponse) Mutable(fd protoreflect.FieldDesc
 func (x *fastReflection_QueryShowRoomResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	case "aaronetwork.chat.QueryShowRoomResponse.room":
-		return protoreflect.ValueOfString("")
+		m := new(Room)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: aaronetwork.chat.QueryShowRoomResponse"))
@@ -2331,8 +2503,8 @@ func (x *fastReflection_QueryShowRoomResponse) ProtoMethods() *protoiface.Method
 		var n int
 		var l int
 		_ = l
-		l = len(x.Room)
-		if l > 0 {
+		if x.Room != nil {
+			l = options.Size(x.Room)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -2364,10 +2536,17 @@ func (x *fastReflection_QueryShowRoomResponse) ProtoMethods() *protoiface.Method
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Room) > 0 {
-			i -= len(x.Room)
-			copy(dAtA[i:], x.Room)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Room)))
+		if x.Room != nil {
+			encoded, err := options.Marshal(x.Room)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -2424,7 +2603,7 @@ func (x *fastReflection_QueryShowRoomResponse) ProtoMethods() *protoiface.Method
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Room", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2434,23 +2613,27 @@ func (x *fastReflection_QueryShowRoomResponse) ProtoMethods() *protoiface.Method
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Room = string(dAtA[iNdEx:postIndex])
+				if x.Room == nil {
+					x.Room = &Room{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Room); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -2500,7 +2683,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
 type QueryParamsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2527,13 +2709,11 @@ func (*QueryParamsRequest) Descriptor() ([]byte, []int) {
 	return file_aaronetwork_chat_query_proto_rawDescGZIP(), []int{0}
 }
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 type QueryParamsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// params holds all the parameters of this module.
 	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
 }
 
@@ -2568,6 +2748,8 @@ type QueryListRoomRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Pagination *v1beta1.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListRoomRequest) Reset() {
@@ -2590,13 +2772,20 @@ func (*QueryListRoomRequest) Descriptor() ([]byte, []int) {
 	return file_aaronetwork_chat_query_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *QueryListRoomRequest) GetPagination() *v1beta1.PageRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
 type QueryListRoomResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Room       string `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
-	Pagination string `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Room       []*Room               `protobuf:"bytes,1,rep,name=room,proto3" json:"room,omitempty"`
+	Pagination *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListRoomResponse) Reset() {
@@ -2619,18 +2808,18 @@ func (*QueryListRoomResponse) Descriptor() ([]byte, []int) {
 	return file_aaronetwork_chat_query_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *QueryListRoomResponse) GetRoom() string {
+func (x *QueryListRoomResponse) GetRoom() []*Room {
 	if x != nil {
 		return x.Room
 	}
-	return ""
+	return nil
 }
 
-func (x *QueryListRoomResponse) GetPagination() string {
+func (x *QueryListRoomResponse) GetPagination() *v1beta1.PageResponse {
 	if x != nil {
 		return x.Pagination
 	}
-	return ""
+	return nil
 }
 
 type QueryShowRoomRequest struct {
@@ -2673,7 +2862,7 @@ type QueryShowRoomResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Room string `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
+	Room *Room `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
 }
 
 func (x *QueryShowRoomResponse) Reset() {
@@ -2696,11 +2885,11 @@ func (*QueryShowRoomResponse) Descriptor() ([]byte, []int) {
 	return file_aaronetwork_chat_query_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *QueryShowRoomResponse) GetRoom() string {
+func (x *QueryShowRoomResponse) GetRoom() *Room {
 	if x != nil {
 		return x.Room
 	}
-	return ""
+	return nil
 }
 
 var File_aaronetwork_chat_query_proto protoreflect.FileDescriptor
@@ -2718,61 +2907,73 @@ var file_aaronetwork_chat_query_proto_rawDesc = []byte{
 	0x61, 0x31, 0x2f, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x1d, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
 	0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x52, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x3b, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x18, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8,
-	0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x16, 0x0a, 0x14,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x22, 0x4b, 0x0a, 0x15, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73,
-	0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a,
-	0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6f,
-	0x6d, 0x12, 0x1e, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x22, 0x26, 0x0a, 0x14, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f,
-	0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x2b, 0x0a, 0x15, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x32, 0x8b, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x12, 0x77, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x24, 0x2e, 0x61, 0x61, 0x72,
-	0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x25, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63,
-	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12,
-	0x18, 0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68,
-	0x61, 0x74, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x80, 0x01, 0x0a, 0x08, 0x4c, 0x69,
-	0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x26, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c,
-	0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27,
-	0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12,
-	0x1b, 0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68,
-	0x61, 0x74, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x12, 0x85, 0x01, 0x0a,
-	0x08, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x26, 0x2e, 0x61, 0x61, 0x72, 0x6f,
+	0x74, 0x6f, 0x1a, 0x1b, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f,
+	0x63, 0x68, 0x61, 0x74, 0x2f, 0x72, 0x6f, 0x6f, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
+	0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x52, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3b, 0x0a, 0x06,
+	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x61,
+	0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a,
+	0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x5e, 0x0a, 0x14, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62,
+	0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61,
+	0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a, 0x70,
+	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x8c, 0x01, 0x0a, 0x15, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x16, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x12,
+	0x47, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73,
+	0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e,
+	0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61,
+	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x26, 0x0a, 0x14, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0x43, 0x0a, 0x15, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f,
+	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x04, 0x72, 0x6f, 0x6f,
+	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x52, 0x6f, 0x6f, 0x6d, 0x52,
+	0x04, 0x72, 0x6f, 0x6f, 0x6d, 0x32, 0x8b, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12,
+	0x77, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x24, 0x2e, 0x61, 0x61, 0x72, 0x6f,
 	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x27, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f,
-	0x6f, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93,
-	0x02, 0x22, 0x12, 0x20, 0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x2f,
-	0x7b, 0x69, 0x64, 0x7d, 0x42, 0xa5, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x61, 0x61, 0x72,
-	0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x42, 0x0a, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x61, 0x61, 0x72,
-	0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x61, 0x72,
-	0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03,
-	0x41, 0x43, 0x58, 0xaa, 0x02, 0x10, 0x41, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x43, 0x68, 0x61, 0x74, 0xca, 0x02, 0x10, 0x41, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02, 0x1c, 0x41, 0x61, 0x72, 0x6f,
-	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x41, 0x61, 0x72, 0x6f, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x25, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12, 0x18,
+	0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68, 0x61,
+	0x74, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x80, 0x01, 0x0a, 0x08, 0x4c, 0x69, 0x73,
+	0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x26, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69,
+	0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e,
+	0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b,
+	0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68, 0x61,
+	0x74, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x12, 0x85, 0x01, 0x0a, 0x08,
+	0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x26, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x27, 0x2e, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x6f, 0x6f,
+	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x22, 0x12, 0x20, 0x2f, 0x61, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f,
+	0x63, 0x68, 0x61, 0x74, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x2f, 0x7b,
+	0x69, 0x64, 0x7d, 0x42, 0xa5, 0x01, 0x0a, 0x14, 0x63, 0x6f, 0x6d, 0x2e, 0x61, 0x61, 0x72, 0x6f,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x42, 0x0a, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x20, 0x61, 0x61, 0x72, 0x6f,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x61, 0x72, 0x6f,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x63, 0x68, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x41,
+	0x43, 0x58, 0xaa, 0x02, 0x10, 0x41, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x43, 0x68, 0x61, 0x74, 0xca, 0x02, 0x10, 0x41, 0x61, 0x72, 0x6f, 0x6e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x5c, 0x43, 0x68, 0x61, 0x74, 0xe2, 0x02, 0x1c, 0x41, 0x61, 0x72, 0x6f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x43, 0x68, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x11, 0x41, 0x61, 0x72, 0x6f, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x43, 0x68, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2796,20 +2997,27 @@ var file_aaronetwork_chat_query_proto_goTypes = []interface{}{
 	(*QueryShowRoomRequest)(nil),  // 4: aaronetwork.chat.QueryShowRoomRequest
 	(*QueryShowRoomResponse)(nil), // 5: aaronetwork.chat.QueryShowRoomResponse
 	(*Params)(nil),                // 6: aaronetwork.chat.Params
+	(*v1beta1.PageRequest)(nil),   // 7: cosmos.base.query.v1beta1.PageRequest
+	(*Room)(nil),                  // 8: aaronetwork.chat.Room
+	(*v1beta1.PageResponse)(nil),  // 9: cosmos.base.query.v1beta1.PageResponse
 }
 var file_aaronetwork_chat_query_proto_depIdxs = []int32{
 	6, // 0: aaronetwork.chat.QueryParamsResponse.params:type_name -> aaronetwork.chat.Params
-	0, // 1: aaronetwork.chat.Query.Params:input_type -> aaronetwork.chat.QueryParamsRequest
-	2, // 2: aaronetwork.chat.Query.ListRoom:input_type -> aaronetwork.chat.QueryListRoomRequest
-	4, // 3: aaronetwork.chat.Query.ShowRoom:input_type -> aaronetwork.chat.QueryShowRoomRequest
-	1, // 4: aaronetwork.chat.Query.Params:output_type -> aaronetwork.chat.QueryParamsResponse
-	3, // 5: aaronetwork.chat.Query.ListRoom:output_type -> aaronetwork.chat.QueryListRoomResponse
-	5, // 6: aaronetwork.chat.Query.ShowRoom:output_type -> aaronetwork.chat.QueryShowRoomResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 1: aaronetwork.chat.QueryListRoomRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	8, // 2: aaronetwork.chat.QueryListRoomResponse.room:type_name -> aaronetwork.chat.Room
+	9, // 3: aaronetwork.chat.QueryListRoomResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	8, // 4: aaronetwork.chat.QueryShowRoomResponse.room:type_name -> aaronetwork.chat.Room
+	0, // 5: aaronetwork.chat.Query.Params:input_type -> aaronetwork.chat.QueryParamsRequest
+	2, // 6: aaronetwork.chat.Query.ListRoom:input_type -> aaronetwork.chat.QueryListRoomRequest
+	4, // 7: aaronetwork.chat.Query.ShowRoom:input_type -> aaronetwork.chat.QueryShowRoomRequest
+	1, // 8: aaronetwork.chat.Query.Params:output_type -> aaronetwork.chat.QueryParamsResponse
+	3, // 9: aaronetwork.chat.Query.ListRoom:output_type -> aaronetwork.chat.QueryListRoomResponse
+	5, // 10: aaronetwork.chat.Query.ShowRoom:output_type -> aaronetwork.chat.QueryShowRoomResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_aaronetwork_chat_query_proto_init() }
@@ -2818,6 +3026,7 @@ func file_aaronetwork_chat_query_proto_init() {
 		return
 	}
 	file_aaronetwork_chat_params_proto_init()
+	file_aaronetwork_chat_room_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_aaronetwork_chat_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsRequest); i {
