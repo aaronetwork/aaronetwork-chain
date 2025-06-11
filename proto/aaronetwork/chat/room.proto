@@ -9,4 +9,5 @@ message Room {
   string creator = 2;
   string title = 3;
   string description = 4;
+  string handle = 5;
 }
