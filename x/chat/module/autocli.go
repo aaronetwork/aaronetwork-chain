@@ -44,9 +44,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateRoom",
-					Use:            "create-room [title] [description]",
+					Use:            "create-room [title] [description] [handle]",
 					Short:          "Send a create-room tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "description"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "description"}, {ProtoField: "handle"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
