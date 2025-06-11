@@ -14,6 +14,10 @@ func (k msgServer) CreateRoom(goCtx context.Context, msg *types.MsgCreateRoom) (
 	sdkCtx := sdk.UnwrapSDKContext(goCtx)
 	ctx := sdk.WrapSDKContext(sdkCtx)
 
+	if err := msg.ValidateBasic(); err != nil {
+		return nil, err
+	}
+
 	roomID := time.Now().UTC().Format("20060102150405") + "-" + uuid.NewString()
 
 	room := types.Room{
@@ -21,6 +25,7 @@ func (k msgServer) CreateRoom(goCtx context.Context, msg *types.MsgCreateRoom) (
 		Creator:     msg.Creator,
 		Title:       msg.Title,
 		Description: msg.Description,
+		Handle:      msg.Handle,
 	}
 
 	k.Keeper.SetRoom(ctx, room)
