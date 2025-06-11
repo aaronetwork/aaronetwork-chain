@@ -19,7 +19,7 @@ func (k Keeper) SetRoom(ctx context.Context, room types.Room) {
 		panic(err)
 	}
 
-	key := []byte("room:" + room.Id)
+	key := []byte(RoomIDPrefix + room.Id)
 	if err := store.Set(key, bz); err != nil {
 		log.Printf("Error when set room: %v", err)
 		return
